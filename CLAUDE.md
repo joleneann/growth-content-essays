@@ -112,10 +112,30 @@ The major ideas, mental models, and frameworks discussed. Each insight gets its 
 Concrete, actionable takeaways organized as specific things to try. Not abstract advice; real moves a growth practitioner can make Monday morning.
 
 ### 6. Growth Engineering Lens
-How this content applies to experimentation, product growth, data infrastructure, A/B testing, feature flagging, growth loops, technical implementation. Written for someone who builds growth systems.
+Written for someone who builds growth systems. Ground this section in how practitioners actually work, not abstract theory. Draw on these realities:
+
+- **Experimentation infrastructure**: How does this content affect what you'd build into your experiment platform? Think Statsig/Eppo/GrowthBook, feature flags, sequential testing, CUPED, holdout groups. Reference the Alexey Test's 11 steps where relevant.
+- **The "tent vs. skyscraper" tradeoff**: Growth engineers ship to learn, not to build. Code is disposable; insight is permanent. How does this content change what experiments you'd run, and how quickly?
+- **Activation and onboarding**: Concrete engineering moves (fake door tests, CLI-based onboarding, video-assisted forms, progressive disclosure). What would you instrument or measure differently?
+- **Growth loops (not funnels)**: How does this content connect to building compounding systems where output feeds back into input? Viral loops, content loops, paid loops, data flywheels.
+- **Tooling and self-serve**: One of a growth engineer's highest-leverage moves is removing themselves as a bottleneck. What no-code tooling, internal dashboards, or MarTech integrations does this content suggest?
+- **AI-era specifics**: LLMs accelerating hypothesis generation, variant assembly, and metric interpretation. AI coding assistants generating 46% of code. How does this content intersect with AI-native experimentation?
+- **Metrics**: Tie back to activation rate, experiment velocity (4-6 tests/month typical), time-to-value, feature adoption, retention cohorts. Use real benchmarks where they fit.
+
+Reference the research knowledge base at `research/growth-engineering-2025-2026-raw-notes.md` for specific data points, benchmarks, and company examples.
 
 ### 7. Growth Marketing Lens
-How this content applies to acquisition channels, retention mechanics, engagement campaigns, lifecycle marketing, paid/organic strategy. Written for someone who runs growth campaigns.
+Written for someone who runs growth campaigns. Ground this section in current channel realities and practitioner frameworks, not textbook marketing.
+
+- **Channel strategy**: How does this content affect paid (Meta Lattice, Google AI Max), organic (SEO is now AEO; 58.5% zero-click searches), PLG mechanics (freemium at 5% conversion, PQLs at 25-30%), community-led growth (Notion's 95% organic), lifecycle email (41% revenue lift from AI personalization), or ABM (171% ACV lift)?
+- **The CAC crisis**: B2B SaaS CAC up 40-60% since 2023. Referrals remain cheapest ($141-$200). How does this content suggest lowering acquisition costs or improving payback period (median 6.8-18 months)?
+- **Growth loops over funnels**: Funnels are linear and run out of fuel. Loops compound. How does this content connect to building loops (viral, content, paid, sales) rather than optimizing funnels?
+- **Pricing and monetization**: 1,800+ pricing changes among top 500 SaaS/AI companies in 2025. Credit models up 126% YoY. Hybrid pricing is the emerging standard. How does this content affect packaging, pricing, or monetization strategy?
+- **Attribution and measurement**: Third-party cookies dying (Safari/Firefox already block). First-party data is king (71% of publishers recognize this). Dark social unmeasurable but increasingly important. How does this content affect how you measure what's working?
+- **AI's impact on marketing**: Meta's 11 new AI ad tools. Google's keyword-free AI Max. AI-generated content: only 3% of pages survive 3 months in top 100. AI referral visitors convert 23x higher than organic. What does this content mean for your AI marketing strategy?
+- **Frameworks**: Connect to AARRR, ICE/PIE scoring, North Star metrics, Emily Kramer's GACC, Elena Verna's 10 anti-patterns, Brian Balfour's Four Fits for channel selection. Use whichever framework fits the content naturally.
+
+Reference the research knowledge base at `research/growth-marketing-2025-2026-raw-notes.md` for specific data points, benchmarks, and company examples.
 
 ### 8. Contrarian / Non-Obvious Takes
 Surprising, counterintuitive, or against-the-grain points worth remembering. Things most people would miss or disagree with.
