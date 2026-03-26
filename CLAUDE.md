@@ -6,24 +6,16 @@ This project converts long-form growth content (YouTube talks, podcast interview
 
 1. **User sends input**: A YouTube link, blog URL, Maven Lightning Lesson link, or pasted text from any growth operator (Lenny Rachitsky, a16z partners, Reforge instructors, Figma leaders, Anthropic folks, etc.)
 2. **Claude fetches the content**:
-   - **YouTube links**: Use `ytsearch` (installed at `tools/ytsearch/`) to extract the full transcript with timestamps in a single command:
+   - **YouTube links**: Use `ytsearch` (`tools/ytsearch/`) to extract transcripts instantly via CLI:
      ```
-     cd D:/Claude Code Projects/Lenny/tools/ytsearch && "C:\Users\Jolene Fernandes\.local\bin\uv" run ytsearch.py "YOUTUBE_URL" > ../../transcripts/speaker-name-topic.txt
+     cd tools/ytsearch && uv run ytsearch.py "YOUTUBE_URL" > ../../transcripts/speaker-name-topic.txt
      ```
-     This pulls captions directly from YouTube's endpoint over HTTP. No browser, no API keys, instant results. If ytsearch fails (rare cases where captions are disabled), fall back to opening the video in the browser and using youtube-transcript.io.
-   - **Maven Lightning Lessons**: The video is hosted on Mux. Use the faster-whisper transcription pipeline:
-     1. Open the lesson page in the browser and extract the Mux playback ID via JavaScript:
-        ```js
-        document.querySelector('mux-player').getAttribute('playback-id')
-        ```
-     2. Construct the stream URL: `https://stream.mux.com/{PLAYBACK_ID}.m3u8`
-     3. Run the transcription script:
-        ```
-        "D:/Claude Code Projects/Lenny/tools/whisper-env/Scripts/python.exe" "D:/Claude Code Projects/Lenny/tools/transcribe_maven.py" "https://stream.mux.com/{PLAYBACK_ID}.m3u8" "D:/Claude Code Projects/Lenny/transcripts/speaker-name-topic.txt"
-        ```
-     This downloads the audio via ffmpeg and transcribes it locally using faster-whisper (CPU, int8 quantized). A 45-minute lesson takes ~2-5 minutes to transcribe.
+     Pulls captions directly from YouTube over HTTP. No browser, no API keys. Fallback: youtube-transcript.io via browser.
+   - **Maven Lightning Lessons**: Video is hosted on Mux. Use the faster-whisper pipeline:
+     1. Extract the Mux playback ID from the lesson page via browser JS: `document.querySelector('mux-player').getAttribute('playback-id')`
+     2. Run: `tools/whisper-env/Scripts/python.exe tools/transcribe_maven.py "https://stream.mux.com/{PLAYBACK_ID}.m3u8" "transcripts/speaker-name-topic.txt"`
 
-     **Fallback**: If the Mux playback ID is not accessible or ffmpeg can't download the stream, open the lesson page in the browser, manually click play, then enable the hidden CC subtitle track via JavaScript (`textTracks[subtitles].mode = 'showing'`), seek through the video to force cue loading, and extract cue text.
+     Downloads audio via ffmpeg, transcribes locally with faster-whisper (CPU, int8). ~2-5 min for a 45-min lesson. Fallback: browser CC track extraction (requires manual play click).
    - **Blog URLs**: Fetch via WebFetch and extract the article content. Only process blogs where the full content is accessible. If a blog is paywalled, ask the user to copy-paste the full text instead.
    - **Pasted text**: Process directly.
 3. **Claude runs contextual web research** (see Research Phase below).
@@ -195,4 +187,4 @@ When source content contains important diagrams, charts, framework visuals, data
 - Format: PDF
 - Location: `D:/Claude Code Projects/Lenny/essays/`
 - Naming: `YYYY-MM-DD - Title.pdf`
-- Generate PDFs using the Node.js script (`essays/generate_pdf.mjs`) with pdf-lib and @pdf-lib/fontkit
+- Generate PDFs using the Node.js script (`essays/md2pdf.mjs`) with pdf-lib and @pdf-lib/fontkit
