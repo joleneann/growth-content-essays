@@ -127,43 +127,37 @@ npm install  # in case dependencies changed
 
 ### Usage
 
-Open Claude Code in the project directory and send a link:
+Open Claude Code in the project directory and send a link. For example:
 
-```
-# YouTube video
-"Process this: https://www.youtube.com/watch?v=VIDEO_ID"
-
-# Blog post
-"Process this: https://a16z.com/some-article/"
-
-# Maven Lightning Lesson
-"Process this: https://maven.com/p/LESSON_ID/lesson-name"
-
-# Pasted text
-"Process this: [paste full article text]"
-```
+- *YouTube video:* "Process this: https://www.youtube.com/watch?v=VIDEO_ID"
+- *Blog post:* "Process this: https://a16z.com/some-article/"
+- *Maven lesson:* "Process this: https://maven.com/p/LESSON_ID/lesson-name"
+- *Pasted text:* "Process this: [paste full article text]"
 
 Claude Code handles everything: extraction, research, essay writing, and PDF generation.
 
 ## Project Structure
 
-```
-CLAUDE.md                    # System instructions, essay template, and research rules
-essays/md2pdf.mjs            # Custom PDF generator with image embedding
-tools/transcribe_maven.py    # Maven/Mux video transcription script
-fonts/                       # Inter and InterDisplay TTF files (6 TTFs)
-samples/                     # Sample essay outputs (.md + .pdf)
-package.json                 # Node.js dependencies (pdf-lib, fontkit)
-```
+**In the repo:**
 
-**Local only (not in repo):**
-```
-transcripts/                 # Saved transcripts for re-use
-essays/*.pdf                 # Generated essay PDFs
-essays/images/               # Screenshotted illustrations
-tools/ytsearch/              # Cloned ytsearch repo
-tools/whisper-env/           # Python venv with faster-whisper
-```
+| File | Purpose |
+|------|---------|
+| `CLAUDE.md` | System instructions, essay template, and research rules |
+| `essays/md2pdf.mjs` | Custom PDF generator with image embedding |
+| `tools/transcribe_maven.py` | Maven/Mux video transcription script |
+| `fonts/` | Inter and InterDisplay TTF files (6 TTFs) |
+| `samples/` | Sample essay outputs (.md + .pdf) |
+| `package.json` | Node.js dependencies (pdf-lib, fontkit) |
+
+**Local only (generated, not committed):**
+
+| Directory | Contents |
+|-----------|----------|
+| `transcripts/` | Saved transcripts for re-use |
+| `essays/*.pdf` | Generated essay PDFs |
+| `essays/images/` | Screenshotted illustrations |
+| `tools/ytsearch/` | Cloned ytsearch repo |
+| `tools/whisper-env/` | Python venv with faster-whisper |
 
 ## Built By
 
