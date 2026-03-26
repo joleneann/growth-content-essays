@@ -8,28 +8,15 @@ The best growth thinking lives in hour-long YouTube talks, 90-minute podcast epi
 
 ## How It Works
 
-```
-Input (YouTube link, blog URL, Maven lesson link, or pasted text)
-    |
-    v
-Content Extraction
-    |  YouTube: ytsearch CLI (instant, no browser)
-    |  Maven/Mux: faster-whisper local transcription
-    |  Blogs: direct HTTP fetch + illustration screenshots
-    |
-    v
-4-Dimension Contextual Research (WebSearch)
-    |  A. Bridge to growth engineering & marketing
-    |  B. Speaker's extended thinking (other talks, posts, tweets)
-    |  C. Supporting & contrasting evidence
-    |  D. Framework lineage (canonical sources)
-    |
-    v
-Essay Generation (11-section template)
-    |
-    v
-PDF Output (custom generator with embedded illustrations)
-```
+**Step 1: Content Extraction**
+> YouTube: ytsearch CLI (instant, no browser) | Maven/Mux: faster-whisper local transcription | Blogs: direct HTTP fetch + illustration screenshots
+
+**Step 2: 4-Dimension Contextual Research**
+> A. Bridge to growth engineering & marketing | B. Speaker's extended thinking | C. Supporting & contrasting evidence | D. Framework lineage
+
+**Step 3: Essay Generation** (11-section template)
+
+**Step 4: PDF Output** (custom generator with embedded illustrations)
 
 Send a link. Get back a comprehensive essay that you can read instead of watching the video, enriched with contextual research from high-quality growth sources.
 
