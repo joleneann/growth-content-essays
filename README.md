@@ -67,7 +67,7 @@ See the [`samples/`](samples/) directory for a complete example essay:
 
 ## Tech Stack
 
-- **Content extraction**: Browser automation (Chrome), youtube-transcript.io, WebFetch
+- **Content extraction**: [ytsearch](https://github.com/Infatoshi/ytsearch) for YouTube transcripts, [faster-whisper](https://github.com/SYSTRAN/faster-whisper) + ffmpeg for Maven/Mux video transcription, WebFetch for blogs
 - **Research**: WebSearch with source quality filtering
 - **PDF generation**: Custom Node.js script using [pdf-lib](https://github.com/Hopding/pdf-lib) with [fontkit](https://github.com/nicolo-ribaudo/fontkit)
 - **Typography**: [Inter](https://rsms.me/inter/) (body) + InterDisplay (headings)
