@@ -77,7 +77,7 @@ See the [`samples/`](samples/) directory for a complete example essay:
 
 Research is filtered to high-quality growth sources:
 
-**Preferred**: Reforge, Lenny's Newsletter, a16z, First Round Review, Y Combinator, Stratechery, Andrew Chen, Casey Winters, Brian Balfour, Elena Verna, company growth blogs (Airbnb, Spotify, Figma, Notion)
+**Preferred**: 20 curated growth practitioners including Lenny Rachitsky, Andrew Chen, Brian Balfour, Elena Verna, Sean Ellis, Kyle Poyar, Emily Kramer (MKT1), Wes Kao, Marc Andreessen, Julie Zhuo, How They Grow, Marily Nika, and others. Plus publications: Reforge, a16z, First Round Review, Y Combinator, Stratechery, and company growth blogs (Airbnb, Spotify, Figma, Notion)
 
 **Acceptable**: HBR, Wired, TechCrunch (for data and case studies)
 
