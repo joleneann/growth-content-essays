@@ -16,8 +16,9 @@ fonts/Inter.zip
 # Personal files
 to be studied.txt
 
-# External tools (cloned repos)
-tools/
+# External tools (cloned repos, venvs)
+tools/ytsearch/
+tools/whisper-env/
 
 # OS files
 .DS_Store

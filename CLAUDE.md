@@ -11,7 +11,19 @@ This project converts long-form growth content (YouTube talks, podcast interview
      cd D:/Claude Code Projects/Lenny/tools/ytsearch && "C:\Users\Jolene Fernandes\.local\bin\uv" run ytsearch.py "YOUTUBE_URL" > ../../transcripts/speaker-name-topic.txt
      ```
      This pulls captions directly from YouTube's endpoint over HTTP. No browser, no API keys, instant results. If ytsearch fails (rare cases where captions are disabled), fall back to opening the video in the browser and using youtube-transcript.io.
-   - **Maven Lightning Lessons**: Open the lesson page in the browser. The video is hosted on Mux. Enable the hidden English CC subtitle track on the mux-player element via JavaScript (`textTracks[subtitles].mode = 'showing'`), seek through the video at 25%/50%/75%/end to force all cues to load, then extract all cue text. There is no visible CC button but the track data is there.
+   - **Maven Lightning Lessons**: The video is hosted on Mux. Use the faster-whisper transcription pipeline:
+     1. Open the lesson page in the browser and extract the Mux playback ID via JavaScript:
+        ```js
+        document.querySelector('mux-player').getAttribute('playback-id')
+        ```
+     2. Construct the stream URL: `https://stream.mux.com/{PLAYBACK_ID}.m3u8`
+     3. Run the transcription script:
+        ```
+        "D:/Claude Code Projects/Lenny/tools/whisper-env/Scripts/python.exe" "D:/Claude Code Projects/Lenny/tools/transcribe_maven.py" "https://stream.mux.com/{PLAYBACK_ID}.m3u8" "D:/Claude Code Projects/Lenny/transcripts/speaker-name-topic.txt"
+        ```
+     This downloads the audio via ffmpeg and transcribes it locally using faster-whisper (CPU, int8 quantized). A 45-minute lesson takes ~2-5 minutes to transcribe.
+
+     **Fallback**: If the Mux playback ID is not accessible or ffmpeg can't download the stream, open the lesson page in the browser, manually click play, then enable the hidden CC subtitle track via JavaScript (`textTracks[subtitles].mode = 'showing'`), seek through the video to force cue loading, and extract cue text.
    - **Blog URLs**: Fetch via WebFetch and extract the article content. Only process blogs where the full content is accessible. If a blog is paywalled, ask the user to copy-paste the full text instead.
    - **Pasted text**: Process directly.
 3. **Claude runs contextual web research** (see Research Phase below).
