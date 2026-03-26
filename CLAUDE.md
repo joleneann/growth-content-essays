@@ -40,16 +40,35 @@ When the speaker references established frameworks (crossing the chasm, jobs to 
 ### Source Quality Rules
 
 **Preferred sources** (search these first):
-- Reforge blog and courses
+
+*Growth operators the user follows:*
 - Lenny's Newsletter (lennysnewsletter.com)
-- a16z blog (a16z.com)
+- Andrew Chen's essays (andrewchen.com, @andrewchen on Substack)
+- Brian Balfour's writing (brianbalfour.com)
+- Elena Verna (Growth Scoop, elenaverna.com)
+- Sean Ellis (Growth with Sean Ellis)
+- Kyle Poyar's Growth Unhinged (OpenView, PLG pricing)
+- Wes Kao's Newsletter (Maven co-founder)
+- Marc Andreessen (Substack, a16z)
+- Marily Nika (AI Product Academy)
+- Emily Kramer (MKT1 Newsletter, B2B marketing)
+- How They Grow (company growth teardowns)
+- Julie Zhuo (The Looking Glass, product/design leadership)
+- Product-led GTM
+- Growth by Gaurav
+- Growth Notes by Sandy Diao
+- Growthmates with Kate Syuma
+- The GTM Engineer
+- Kieran's AI Marketing Generalist
+- Ravi on Product
+- Casey Winters' writing
+
+*Publications and blogs:*
+- a16z blog + a16z Growth Newsletter (a16z.com)
+- Reforge blog and courses
 - First Round Review (review.firstround.com)
 - Y Combinator blog (ycombinator.com/blog)
 - Stratechery (stratechery.com)
-- Andrew Chen's essays (andrewchen.com)
-- Casey Winters' writing
-- Brian Balfour's writing (brianbalfour.com)
-- Elena Verna's posts
 - Company growth/engineering blogs: Airbnb, Spotify, Figma, Notion, Amplitude, Mixpanel, HubSpot
 
 **Acceptable** (for data and case studies):
