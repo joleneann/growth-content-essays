@@ -19,6 +19,8 @@ Send a link. Get back a comprehensive essay you can read instead of watching the
 
 **Zero redundancy.** The essay template enforces strict anti-repetition rules: every idea, quote, and data point gets exactly one home. Cross-references replace restatements. The result is essays that are 25-35% shorter with zero loss of unique content.
 
+**Multi-source synthesis.** Send multiple sources on the same theme and the system weaves them into a single cohesive essay, tracing where authors agree, diverge, and build on each other. The [On Taste](samples/On%20Taste.pdf) sample combines six independent voices (Paul Graham, Julie Zhuo, Gaurav Vohra, Emil Kowalski, Anu Atluru, Steve Jobs) spanning two decades into one unified argument.
+
 **Research-enriched.** Before writing, the system finds the speaker's extended thinking on the same themes, locates supporting or contrasting evidence, and traces frameworks to canonical sources. All from a curated list of 20+ preferred growth practitioners and publications.
 
 ## Curatorial Lens
@@ -72,6 +74,7 @@ Open Claude Code in the project directory and send a link:
 - *Blog:* "Process this: https://a16z.com/some-article/"
 - *Maven:* "Process this: https://maven.com/p/LESSON_ID/lesson-name"
 - *Pasted text:* "Process this: [paste full article text]"
+- *Multi-source:* "Synthesize these into one essay: [link 1] [link 2] [link 3]"
 
 ## Project Structure
 
