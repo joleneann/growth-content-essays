@@ -27,7 +27,7 @@ This project converts long-form growth content (YouTube talks, podcast interview
    - **Blog URLs**: Fetch via WebFetch and extract the article content. Only process blogs where the full content is accessible. If a blog is paywalled, ask the user to copy-paste the full text instead.
    - **Pasted text**: Process directly.
 3. **Claude runs contextual web research** (see Research Phase below).
-4. **Claude writes a detailed essay** following the template below, enriched by the research.
+4. **Claude writes a detailed essay** following the template below, enriched by the research. **CRITICAL: NEVER start writing the essay until ALL research agents have returned. The research enriches every section of the essay. Writing before research completes means rewriting later and produces a worse first draft. Always wait.**
 5. **Claude saves the essay as a PDF** in `essays/` using the PDF skill, named `YYYY-MM-DD - Title.pdf`.
 
 ## Research Phase
