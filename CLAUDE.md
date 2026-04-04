@@ -14,7 +14,8 @@ This project converts long-form growth content (YouTube talks, podcast interview
    - **Maven Lightning Lessons**: Video is hosted on Mux with signed (JWT-protected) streams. Use the Groq Whisper API pipeline (fast, cheap, accurate):
      1. Extract the **full signed URL** (not just the playback ID) from the lesson page via browser JS: `document.querySelector('mux-player').media.src`
         This returns `https://stream.mux.com/{PID}.m3u8?token={JWT}`. The `.media.src` is only populated after the video starts loading; on some pages you may need to click play first.
-     2. Run: `GROQ_API_KEY=your_key tools/whisper-env/Scripts/python.exe tools/transcribe_groq.py "FULL_SIGNED_URL" "transcripts/speaker-name-topic.txt"`
+     2. Run: `tools/whisper-env/Scripts/python.exe tools/transcribe_groq.py "FULL_SIGNED_URL" "transcripts/speaker-name-topic.txt"`
+        The script auto-loads GROQ_API_KEY from the `.env` file in the project root. No need to pass it inline.
 
      Downloads audio via ffmpeg, transcribes via Groq's Whisper API (whisper-large-v3-turbo, 247x real-time). ~15-30 seconds per 45-min lesson. Cost: ~$0.03/lesson. Auto-chunks files over 25MB for the API size limit. Falls back to local faster-whisper if GROQ_API_KEY is not set.
 

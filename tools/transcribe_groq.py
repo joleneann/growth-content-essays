@@ -24,6 +24,17 @@ import tempfile
 import time
 import math
 
+# Auto-load .env file if GROQ_API_KEY not already set
+if not os.environ.get("GROQ_API_KEY"):
+    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+    if os.path.exists(env_path):
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, val = line.split("=", 1)
+                    os.environ[key.strip()] = val.strip()
+
 def extract_audio(mux_url, audio_path):
     """Download audio from Mux stream URL using ffmpeg."""
     cmd = [
