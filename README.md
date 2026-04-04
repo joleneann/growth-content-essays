@@ -7,8 +7,8 @@ An AI-powered system that converts long-form growth content (YouTube talks, podc
 | Step | What happens |
 |:-----|:-------------|
 | **1. Extract content** | YouTube: ytsearch CLI (instant, no browser). Maven/Mux: faster-whisper local transcription. Blogs: direct HTTP fetch. |
-| **2. Research context** | Four targeted web searches: growth engineering bridge, speaker's extended thinking, supporting/contrasting evidence, framework lineage. |
-| **3. Write essay** | 7-section template with inline Growth Angles, strict anti-repetition rules, and zero redundancy. |
+| **2. Research context** | Three targeted web searches: speaker's extended thinking, supporting/contrasting evidence, framework lineage. |
+| **3. Write essay** | 7-section template with strict anti-repetition rules and zero redundancy. |
 | **4. Generate PDF** | Custom PDF with Inter/InterDisplay typography and embedded framework illustrations. |
 
 Send a link. Get back a comprehensive essay you can read instead of watching the video, enriched with contextual research from high-quality growth sources.
@@ -17,9 +17,9 @@ Send a link. Get back a comprehensive essay you can read instead of watching the
 
 **Not a summary.** A full replacement for watching the video. Every major topic gets proportional depth. Speaker qualifications, caveats, examples, and data points are preserved.
 
-**Zero redundancy.** The essay template enforces strict anti-repetition rules: every idea, quote, and data point gets exactly one home. Growth engineering and marketing perspectives are woven inline as "Growth Angles" after each relevant insight, not siloed into separate sections that rehash the same points. Cross-references replace restatements. The result is essays that are 25-35% shorter with zero loss of unique content.
+**Zero redundancy.** The essay template enforces strict anti-repetition rules: every idea, quote, and data point gets exactly one home. Cross-references replace restatements. The result is essays that are 25-35% shorter with zero loss of unique content.
 
-**Research-enriched.** Before writing, the system searches for how the content connects to growth practice, finds the speaker's extended thinking, locates supporting or contrasting evidence, and traces frameworks to canonical sources. Growth Angles draw on a practitioner knowledge base built from 30+ sources covering real benchmarks, tool landscapes, and current channel economics. All from a curated list of 20+ preferred growth practitioners and publications.
+**Research-enriched.** Before writing, the system finds the speaker's extended thinking on the same themes, locates supporting or contrasting evidence, and traces frameworks to canonical sources. All from a curated list of 20+ preferred growth practitioners and publications.
 
 ## Curatorial Lens
 
