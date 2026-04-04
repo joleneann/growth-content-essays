@@ -76,17 +76,18 @@ if __name__ == "__main__":
 
     source = sys.argv[1]
     output = sys.argv[2]
+    model_size = sys.argv[3] if len(sys.argv) > 3 else "small"
 
     # If source is already a local audio file, skip download
     if os.path.isfile(source):
-        transcribe(source, output)
+        transcribe(source, output, model_size)
     else:
         # Download audio first, then transcribe
         with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmp:
             audio_path = tmp.name
         try:
             extract_audio(source, audio_path)
-            transcribe(audio_path, output)
+            transcribe(audio_path, output, model_size)
         finally:
             if os.path.exists(audio_path):
                 os.unlink(audio_path)
