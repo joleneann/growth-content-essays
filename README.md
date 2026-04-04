@@ -87,4 +87,4 @@ Open Claude Code in the project directory and send a link:
 
 ## About
 
-Built by **Jolene Fernandes**, a growth engineer and marketer who built this system to deeply study the operators she follows. The system reflects how she learns: read over watch, depth over breadth, practitioners over pundits. The source list and the essay structure all come from the same place any good growth strategy does: knowing which signals to pay attention to and which to ignore.
+Built by **Jolene Fernandes**, a growth engineer and marketer who built this system to deeply study the operators she follows. The system reflects how she learns: read over watch, depth over breadth, practitioners over pundits. 
