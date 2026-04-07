@@ -39,6 +39,9 @@ After ingesting the source material but **before writing**, run targeted web sea
 - **NEVER spawn multi-agent workflows (background agents, sub-agents, parallel agent swarms) for any part of the essay workflow.** They are expensive, frequently time out, and destroy compute limits. All research, writing, and PDF generation must run in the main session.
 - **Run 4-8 parallel WebSearch calls** covering the research dimensions below. Review results, then run a second targeted round of 2-4 searches if gaps remain.
 - **No polling or sleep loops.** Every step should execute sequentially: read transcript, run searches, write essay, generate PDF.
+- **NEVER fetch author Substacks, personal blogs, or social profiles just to "add depth."** If the transcript already contains full substance from the speaker, fetching their blog is redundant and wasteful. Only fetch external URLs if a specific claim, framework, or data point in the transcript requires corroboration that WebSearch cannot provide.
+- **NEVER take browser screenshots for confirmation.** Screenshots during transcript extraction or navigation are wasted tool calls. Only screenshot when a visual (chart, diagram, framework image) must be embedded in the essay itself.
+- **Before running any WebFetch call, ask: does the transcript already cover this?** If yes, skip it. The transcripts are the primary source. External fetches are for gaps, not decoration.
 
 Run searches across these four dimensions:
 
