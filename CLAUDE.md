@@ -31,6 +31,10 @@ This project converts long-form growth content (YouTube talks, podcast interview
 4. **Claude writes a detailed essay** following the template below, enriched by the research. **CRITICAL: NEVER start writing the essay until ALL research is complete. The research enriches every section of the essay. Writing before research completes means rewriting later and produces a worse first draft. Always wait.**
 5. **Claude saves the essay as a PDF** in `essays/` using the PDF skill, named `YYYY-MM-DD - Title.pdf`.
 
+## Source Fidelity Rule
+
+**Never silently "correct" proper nouns, product names, company names, or terminology from source transcripts.** YouTube auto-captions regularly mangle names (e.g., rendering a product name as a similar-sounding word). If you suspect a caption error, flag it to the user and ask before changing anything. Never replace what the speaker said with what you think they meant. The transcript is the source of truth for names and terms; your assumptions about what "must have been meant" are not.
+
 ## Research Phase
 
 After ingesting the source material but **before writing**, run targeted web searches using WebSearch to deeply contextualize the content. This is what transforms a transcript dump into a practitioner-grade essay.
