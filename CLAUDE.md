@@ -27,9 +27,14 @@ This project converts long-form growth content (YouTube talks, podcast interview
      **Legacy fallback:** `tools/transcribe_maven.py` uses local faster-whisper (CPU, int8). Much slower (~20-50 min per lesson). Only use if Groq API is unavailable.
    - **Blog URLs**: Fetch via WebFetch and extract the article content. Only process blogs where the full content is accessible. If a blog is paywalled, ask the user to copy-paste the full text instead.
    - **Pasted text**: Process directly.
-3. **Claude runs contextual web research** (see Research Phase below).
-4. **Claude writes a detailed essay** following the template below, enriched by the research. **CRITICAL: NEVER start writing the essay until ALL research is complete. The research enriches every section of the essay. Writing before research completes means rewriting later and produces a worse first draft. Always wait.**
-5. **Claude saves the essay as a PDF** in `essays/` using the PDF skill, named `YYYY-MM-DD - Title.pdf`.
+3. **Claude reads the FULL transcript and builds a topic inventory.** This step is mandatory and non-negotiable.
+   - Read the transcript end-to-end. Every line, not sampling or skimming.
+   - Produce a numbered list of every distinct topic/segment the speaker covers, with approximate timestamps (e.g., "1. [00:00-05:10] Introductions and session overview, 2. [05:10-09:00] The enterprise data problem...").
+   - This list becomes the structural skeleton for Section 3 (Key Insights & Frameworks). No topic on this list may be omitted from the final essay.
+   - Save the topic inventory to the essay markdown file as a working note (remove before final PDF generation).
+4. **Claude runs contextual web research** (see Research Phase below).
+5. **Claude writes a detailed essay** following the template below, enriched by the research. Cross-check every section against the topic inventory from step 3. Any uncovered topic is a failure. **CRITICAL: NEVER start writing the essay until ALL research is complete. The research enriches every section of the essay. Writing before research completes means rewriting later and produces a worse first draft. Always wait.**
+6. **Claude saves the essay as a PDF** in `essays/` using the PDF skill, named `YYYY-MM-DD - Title.pdf`.
 
 ## Source Fidelity Rule
 
@@ -165,6 +170,11 @@ The goal is NOT summarization. The reader is choosing this essay INSTEAD OF watc
 - **Preserve the speaker's qualifications and caveats.** If the speaker said "coding is largely solved, but with important exceptions," do not write "coding is solved." The qualifications are the nuance.
 - **Include specific examples, anecdotes, and data points** the speaker used. If they told a story, describe the story. If they cited a number, cite the number. If they named a company, name the company.
 - **Cover every major topic discussed**, not just the most quotable ones. If the video has 20 chapters, all 20 should be reflected in the essay, even if some are handled briefly.
+- **Cross-check against the topic inventory.** The topic inventory from Workflow step 3 is the checklist. Before finalizing, verify every item on the inventory appears in the essay. Any gap is a failure that must be fixed before generating the PDF.
+- **"Introductory" material is not optional.** Analogies, use cases, audience-friendly explanations, and motivating examples are part of the content the speaker chose to deliver. They are not filler. They go in the essay with the same care as deep technical sections.
+- **Multiple speakers, multiple perspectives.** When two speakers cover the same topic at different depths (e.g., a high-level overview followed by a technical deep dive), both perspectives belong in the essay. They serve different purposes for the reader.
+- **Q&A sections contain real practitioner insights.** Include them as subsections or fold them into the relevant section. Do not discard Q&A content.
+- **Never make editorial judgments about which sections "matter enough."** If the speaker spent time on it, it goes in the essay. The user decides what matters by choosing the source; the model's job is to capture all of it.
 
 ## PDF Formatting Rules
 
