@@ -297,6 +297,101 @@ async function main() {
     y -= 12; // space after image
   }
 
+  // --- TABLES (GFM) ---
+  function isSeparatorRow(s) {
+    return s.includes('-') && /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(s);
+  }
+  function splitRow(s) {
+    const cells = s.trim().split(/(?<!\\)\|/).map(c => c.replace(/\\\|/g, '|').trim());
+    if (cells.length && cells[0] === '') cells.shift();
+    if (cells.length && cells[cells.length - 1] === '') cells.pop();
+    return cells;
+  }
+  function parseAlign(sepCells) {
+    return sepCells.map(c => {
+      const l = c.startsWith(':'), r = c.endsWith(':');
+      if (l && r) return 'center';
+      if (r) return 'right';
+      return 'left';
+    });
+  }
+  const stripMd = s => (s || '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\*\*/g, '').replace(/\*/g, '').replace(/`/g, '');
+
+  function drawTable(header, aligns, rows) {
+    const TS = 8.8, TL = 12.5, cellPadY = 6, cellPadX = 7;
+    const ncols = header.length;
+    const fix = r => { const c = r.slice(0, ncols); while (c.length < ncols) c.push(''); return c; };
+    const hdr = fix(header);
+    const bodyRows = rows.map(fix);
+    const al = aligns.concat(Array(ncols).fill('left')).slice(0, ncols);
+
+    // Column content widths: natural (single-line) widths scaled to fill CW.
+    const nat = new Array(ncols).fill(0);
+    for (let k = 0; k < ncols; k++) nat[k] = Math.max(nat[k], bold.widthOfTextAtSize(stripMd(hdr[k]), TS));
+    for (const row of bodyRows) for (let k = 0; k < ncols; k++) nat[k] = Math.max(nat[k], regular.widthOfTextAtSize(stripMd(row[k]), TS));
+    const maxCol = CW * 0.5;
+    for (let k = 0; k < ncols; k++) nat[k] = Math.min(Math.max(nat[k], 20), maxCol);
+    const availContent = CW - ncols * 2 * cellPadX;
+    let sumNat = nat.reduce((a, b) => a + b, 0) || 1;
+    const contentW = nat.map(n => (n / sumNat) * availContent);
+
+    const colLeft = [];
+    let cx = ML;
+    for (let k = 0; k < ncols; k++) { colLeft.push(cx); cx += contentW[k] + 2 * cellPadX; }
+    const tableRight = cx;
+    const tableW = tableRight - ML;
+    const spaceW = regular.widthOfTextAtSize(' ', TS);
+
+    function paintRow(cells, isHeader) {
+      const cellLines = [];
+      let maxLines = 1;
+      for (let k = 0; k < ncols; k++) {
+        const ls = layoutParagraph(cells[k] || '', { fontSize: TS, baseFont: isHeader ? bold : regular, color: isHeader ? HEADING_COLOR : DARK, maxWidth: contentW[k] });
+        cellLines.push(ls.length ? ls : [[]]);
+        maxLines = Math.max(maxLines, ls.length || 1);
+      }
+      const rowH = maxLines * TL + 2 * cellPadY;
+      if (y - rowH < MB) {
+        page = pdfDoc.addPage([PAGE_W, PAGE_H]);
+        y = PAGE_H - MT;
+        if (!isHeader) paintRow(hdr, true);
+      }
+      const rowTop = y, rowBottom = y - rowH;
+      if (isHeader) page.drawRectangle({ x: ML, y: rowBottom, width: tableW, height: rowH, color: rgb(0.95, 0.955, 0.98) });
+      // borders
+      page.drawLine({ start: { x: ML, y: rowBottom }, end: { x: tableRight, y: rowBottom }, thickness: 0.5, color: RULE_COLOR });
+      if (isHeader) page.drawLine({ start: { x: ML, y: rowTop }, end: { x: tableRight, y: rowTop }, thickness: 0.5, color: RULE_COLOR });
+      page.drawLine({ start: { x: ML, y: rowTop }, end: { x: ML, y: rowBottom }, thickness: 0.5, color: RULE_COLOR });
+      page.drawLine({ start: { x: tableRight, y: rowTop }, end: { x: tableRight, y: rowBottom }, thickness: 0.5, color: RULE_COLOR });
+      for (let k = 1; k < ncols; k++) page.drawLine({ start: { x: colLeft[k], y: rowTop }, end: { x: colLeft[k], y: rowBottom }, thickness: 0.5, color: RULE_COLOR });
+      // text
+      for (let k = 0; k < ncols; k++) {
+        let baseline = rowTop - cellPadY - TS + 1;
+        for (const line of cellLines[k]) {
+          let lw = 0;
+          for (let j = 0; j < line.length; j++) { lw += line[j].w; if (j > 0) lw += spaceW; }
+          const left = colLeft[k] + cellPadX;
+          let dx = al[k] === 'right' ? left + contentW[k] - lw : al[k] === 'center' ? left + (contentW[k] - lw) / 2 : left;
+          for (let j = 0; j < line.length; j++) {
+            const tok = line[j];
+            page.drawText(tok.text, { x: dx, y: baseline, size: TS, font: tok.font, color: tok.color || (isHeader ? HEADING_COLOR : DARK) });
+            if (tok.link) addLinkAnnotation(page, dx, baseline, tok.w, TS, tok.link);
+            dx += tok.w + spaceW;
+          }
+          baseline -= TL;
+        }
+      }
+      y = rowBottom;
+    }
+
+    y -= 8;
+    paintRow(hdr, true);
+    for (const r of bodyRows) paintRow(r, false);
+    y -= PARA_GAP;
+  }
+
   // --- PARSE MARKDOWN ---
   const rawLines = md.split('\n');
   let i = 0;
@@ -356,6 +451,21 @@ async function main() {
       const text = line.replace(/^### /, '');
       drawH2(text);
       i++;
+      continue;
+    }
+
+    // Table (GFM): header row starting with | followed by a separator row
+    if (line.startsWith('|') && i + 1 < rawLines.length && isSeparatorRow(rawLines[i + 1].trim())) {
+      flushPara();
+      const headerCells = splitRow(line);
+      const aligns = parseAlign(splitRow(rawLines[i + 1].trim()));
+      const bodyRows = [];
+      i += 2;
+      while (i < rawLines.length && rawLines[i].trim().startsWith('|')) {
+        bodyRows.push(splitRow(rawLines[i].trim()));
+        i++;
+      }
+      drawTable(headerCells, aligns, bodyRows);
       continue;
     }
 
